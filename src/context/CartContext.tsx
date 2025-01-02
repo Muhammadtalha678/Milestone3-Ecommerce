@@ -4,11 +4,12 @@ import React, { createContext, useEffect, useState } from "react";
 interface cartContextType {
     cart: Product[],
     addToCart : (item:Product) => void,
-    removeFromCart : (id:number) => void,
+    decrementItem : (item:Product) => void,
+    removeFromCart: (id: number) => void,
     
 }
 
-export const CartContext = createContext<cartContextType>({cart:[],addToCart:() => {},removeFromCart:() => {}})
+export const CartContext = createContext<cartContextType>({cart:[],addToCart:() => {},decrementItem:() => {},removeFromCart:() => {}})
 
 const CartContextProvider = ({children}:{children:React.ReactNode}) => {
     const [cart, setCart] = useState<Product[]>([])
@@ -32,7 +33,10 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
             
             setCart([...cart, {...item,minimumOrderQuantity:1}])
         }
+        //for handle data already in cart to increae quantity
         else {
+            console.log("already in cart");
+            
             setCart(
                 cart.map((e) => 
                 e.id == item.id ? {...e,minimumOrderQuantity:e.minimumOrderQuantity + 1} : e
@@ -41,6 +45,14 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
         }
         
     };
+
+    const decrementItem = (item: Product) => {
+        setCart(
+            cart.map((e) =>
+            e.id == item.id ? {...e,minimumOrderQuantity:e.minimumOrderQuantity - 1} : e
+            )
+        )
+    }
 
     const removeFromCart = (id:number) => {
         const productEists = cart.find((e) => e.id === id)
@@ -53,7 +65,7 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
         }
     }
     return (
-        <CartContext.Provider value={{ cart, addToCart,removeFromCart }}>
+        <CartContext.Provider value={{ cart, addToCart,decrementItem,removeFromCart }}>
             {children}
         </CartContext.Provider>
     )
