@@ -33,6 +33,11 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
             setCart([...cart, {...item,minimumOrderQuantity:1}])
         }
         else {
+            setCart(
+                cart.map((e) => 
+                e.id == item.id ? {...e,minimumOrderQuantity:e.minimumOrderQuantity + 1} : e
+                )
+            )
         }
         
     };
