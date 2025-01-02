@@ -3,7 +3,7 @@ import { Product } from "@/interfaces/Product";
 import React, { createContext, useEffect, useState } from "react";
 interface cartContextType {
     cart: Product[],
-    addToCart : (item:object) => void,
+    addToCart : (item:Product) => void,
     removeFromCart : (id:number) => void,
     
 }
@@ -24,8 +24,8 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
         localStorage.setItem('cart',JSON.stringify(cart))
     }, [cart])
     
-    const addToCart = (item: any) => {
-        const productExists = cart.find((e: any) => e.id == item.id)
+    const addToCart = (item: Product) => {
+        const productExists = cart.find((e) => e.id == item.id)
         console.log(productExists);
         
         if (!productExists) {
@@ -36,11 +36,11 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
     };
 
     const removeFromCart = (id:number) => {
-        const productEists = cart.find((e: any) => e.id === id)
+        const productEists = cart.find((e) => e.id === id)
         // console.log(productEists);
         
         if (productEists) {
-            const filterProduct = cart.filter((e: any) => e.id !== id)
+            const filterProduct = cart.filter((e) => e.id !== id)
             // console.log(filterProduct);
             setCart(filterProduct)
         }
