@@ -30,7 +30,9 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
         
         if (!productExists) {
             
-            setCart([...cart, item])
+            setCart([...cart, {...item,minimumOrderQuantity:1}])
+        }
+        else {
         }
         
     };
