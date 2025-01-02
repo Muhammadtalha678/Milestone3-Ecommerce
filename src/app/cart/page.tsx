@@ -6,13 +6,6 @@ import { CartContext } from '@/context/CartContext';
 
 const CartPage = () => {
   const { cart, removeFromCart } = useContext(CartContext);
-  
-  
-  const handleRemove = (itemId: number) => {
-    // Remove item logic
-    console.log('Remove item:', itemId);
-  };
-
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -21,7 +14,7 @@ const CartPage = () => {
           <div className="flex flex-col lg:flex-row justify-between">
             {/* Cart Items */}
             <div className="lg:w-2/3 w-full">
-              {cart.map((item: any) => {
+              {cart.map((item) => {
                 let discountPrice = item.price * (item.discountPercentage / 100)
   
                  discountPrice  = parseInt((item.price - discountPrice).toFixed(0))
@@ -65,12 +58,12 @@ const CartPage = () => {
             </div>
 
             {/* Summary Section */}
-            <div className="lg:w-1/3 w-full mt-10 lg:mt-0">
+            <div className="lg:w-1/3 w-full mt-10 lg:mt-0 lg:ml-10">
               <div className="bg-gray-100 p-5 rounded shadow">
                 <h2 className="text-xl font-bold mb-5">Order Summary</h2>
                 <div className="flex justify-between mb-4">
                   <span>Subtotal</span>
-                  <span>${cart.reduce((total: number, item: any) => total + parseInt((item.price - (item.price*(item.discountPercentage/100))).toFixed(0)) , 0)}</span>
+                  <span>${cart.reduce((total: number, item) => total + parseInt((item.price - (item.price*(item.discountPercentage/100))).toFixed(0)) , 0)}</span>
                 </div>
                 <div className="flex justify-between mb-4">
                   <span>Shipping</span>
@@ -78,7 +71,7 @@ const CartPage = () => {
                 </div>
                 <div className="flex justify-between font-bold text-lg">
                   <span>Total</span>
-                  <span>${cart.reduce((total: number, item: any) => total + item.price, 0) + 5}</span>
+                  <span>${cart.reduce((total: number, item) => total + parseInt((item.price - (item.price*(item.discountPercentage/100))).toFixed(0)) , 0) + 5}</span>
                 </div>
                 <button className="bg-indigo-500 text-white py-2 px-4 w-full mt-5 rounded hover:bg-indigo-600">
                   Proceed to Checkout

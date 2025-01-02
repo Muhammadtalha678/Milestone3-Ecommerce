@@ -6,7 +6,7 @@ export default function Loading() {
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 -m-4">
             {
                         Array(8).fill(null).map((_, index) => (
-                    <div className="max-w-xs mx-auto bg-white rounded-lg shadow-md overflow-hidden w-full">
+                    <div key={index+1} className="max-w-xs mx-auto bg-white rounded-lg shadow-md overflow-hidden w-full">
   {/* <!-- Product Image --> */}
   <div className="bg-gray-200 h-48 w-full animate-pulse"></div>
   

@@ -25,7 +25,7 @@ const Loading = () => {
                 .fill(null)
                 .map((_, index) => (
                   <div
-                    key={index}
+                    key={index+1}
                     className="w-4 h-4 bg-gray-300 rounded animate-pulse"
                   ></div>
                 ))}

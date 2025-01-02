@@ -1,4 +1,4 @@
-
+import {Product} from '@/interfaces/Product'
 import ProductList from '@/components/ProductList';
 const Products = async () => {
 

@@ -1,7 +1,8 @@
 'use client'
+import { Product } from "@/interfaces/Product";
 import React, { createContext, useEffect, useState } from "react";
 interface cartContextType {
-    cart: object[],
+    cart: Product[],
     addToCart : (item:object) => void,
     removeFromCart : (id:number) => void,
     
@@ -10,7 +11,7 @@ interface cartContextType {
 export const CartContext = createContext<cartContextType>({cart:[],addToCart:() => {},removeFromCart:() => {}})
 
 const CartContextProvider = ({children}:{children:React.ReactNode}) => {
-    const [cart, setCart] = useState<object[]>([])
+    const [cart, setCart] = useState<Product[]>([])
     
     useEffect(() => {
         const savedCart = localStorage.getItem('cart')

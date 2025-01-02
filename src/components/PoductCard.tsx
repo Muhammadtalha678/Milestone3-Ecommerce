@@ -76,7 +76,7 @@ id:number
         {/* Add to Cart Button */}
         {
         
-        cart.find((e:any) => e.id === id) ?
+        cart.find((e) => e.id === id) ?
         <div
           className="mt-4 w-full bg-green-600 text-white px-4 py-2 rounded flex items-center justify-center space-x-2"
         >

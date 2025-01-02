@@ -1,4 +1,5 @@
 import SingleProductDetail from '@/components/ProductDetail';
+import { Product } from '@/interfaces/Product';
 import React from 'react'
 
 const ProductDetail = async({params}:{params: Promise<{id: string}>}) => {
@@ -7,7 +8,7 @@ const ProductDetail = async({params}:{params: Promise<{id: string}>}) => {
         if (!response.ok) {
             throw new Error('Failed to fetch product');
         }
-        const singleProduct = await response.json()
+        const singleProduct:Product = await response.json()
        
         
       return (

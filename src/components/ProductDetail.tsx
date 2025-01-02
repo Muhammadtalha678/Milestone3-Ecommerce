@@ -2,7 +2,8 @@
 import React, { useContext } from 'react'
 import Image from 'next/image'
 import {CartContext} from '@/context/CartContext'
-const SingleProductDetail = ({singleProduct}:{singleProduct:any}) => {
+import { Product } from '@/interfaces/Product'
+const SingleProductDetail = ({singleProduct}:{singleProduct:Product}) => {
     const cartContext = useContext(CartContext)
     const {cart,addToCart} = cartContext
     let discountPrice = singleProduct.price * (singleProduct.discountPercentage / 100)
@@ -50,7 +51,7 @@ const SingleProductDetail = ({singleProduct}:{singleProduct:any}) => {
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">${discountPrice}</span>
               {
-                cart.find((e:any) => e.id === singleProduct.id) ?
+                cart.find((e) => e.id === singleProduct.id) ?
                 <div className="flex ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add to cart</div>
                 :<button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
                 onClick={()=>addToCart(singleProduct)}>Add to cart</button>
