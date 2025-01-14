@@ -5,7 +5,7 @@ const Products = async () => {
     
   try {
     
-    const anity = await client.fetch(
+    const sanity = await client.fetch(
       `*[_type == "product" && "electronics" in tags ]{
         _id,name,price,discountPercentage,tags,
         "image":[image.asset->url]
@@ -13,7 +13,7 @@ const Products = async () => {
     )
     const fetchSale = await client.fetch("*[_type == 'sales']")
     console.log("fetchSale",fetchSale);
-    // console.log(anity);
+    console.log(sanity);
     
         const response = await fetch("https://dummyjson.com/products",
     {cache:'no-cache'})

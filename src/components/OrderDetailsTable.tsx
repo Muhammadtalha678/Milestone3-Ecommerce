@@ -1,6 +1,6 @@
-import { ProductDetail } from "@/interfaces/Sales";
+import { ProductDetail, SalesObj } from "@/interfaces/Sales";
 
-const OrderDetailsTable = ({ orderDetails }: { orderDetails: any[] }) => {
+const OrderDetailsTable = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
   return (
     <div>
       {orderDetails.map((order, orderIndex) => (
