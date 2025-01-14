@@ -1,8 +1,16 @@
 import ProductList from '@/components/ProductList';
+import { client } from '@/sanity/lib/client';
 const Products = async () => {
-
+  
     
-    try {
+  try {
+    const anity = await client.fetch(
+      `*[_type == "product" && "electronics" in tags ]{
+        _id,name,price,discountPercentage,tags,   
+      }`
+    )
+    console.log(anity);
+    
         const response = await fetch("https://dummyjson.com/products",
     {cache:'no-cache'})
     if (!response.ok) {

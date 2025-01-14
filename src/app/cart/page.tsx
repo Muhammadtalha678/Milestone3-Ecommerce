@@ -1,10 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useContext } from 'react';
+import React, {useContext, useState} from 'react';
 import { CartContext } from '@/context/CartContext';
+import PopupForm from '@/components/PopupForm'
 
 const CartPage = () => {
+  
+  const [popUpOpen,setpopUpOpen] = useState<boolean>(false)
   const { cart, removeFromCart,addToCart,decrementItem } = useContext(CartContext);
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -36,7 +39,7 @@ const CartPage = () => {
                       <p className="text-sm text-gray-500">
                         Price: ${discountPrice * item.minimumOrderQuantity}
                       </p>
-                    </div>
+                    </div> 
                   </div>
                   <div className="flex items-center gap-4">
                     {
@@ -90,7 +93,7 @@ const CartPage = () => {
                   <span>Total</span>
                   <span>${cart.reduce((total: number, item) => (total + parseInt((item.price - (item.price*(item.discountPercentage/100))).toFixed(0)) * item.minimumOrderQuantity) , 0) + 5}</span>
                 </div>
-                <button className="bg-indigo-500 text-white py-2 px-4 w-full mt-5 rounded hover:bg-indigo-600">
+                <button onClick={()=>{setpopUpOpen(true)}} className="bg-indigo-500 text-white py-2 px-4 w-full mt-5 rounded hover:bg-indigo-600">
                   Proceed to Checkout
                 </button>
               </div>
@@ -100,6 +103,9 @@ const CartPage = () => {
           <p className="text-center text-gray-500">Your cart is empty.</p>
         )}
       </div>
+        {
+          popUpOpen && <PopupForm onclose={() => setpopUpOpen(false)}/>
+        }
     </section>
   );
 };
