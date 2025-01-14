@@ -23,7 +23,7 @@ export const checkOutUser = async(formData:FormData) => {
         if (result.error) return { success: false, message: result.message }
         return { success: true, message: result.message, data: result.data}
         
-    } catch (error) {
-        return {success:false,message:"Something went wrong"}
+    }   catch (error) {
+        return {success:false,message:"Something went wrong" + error}
     }
 }

@@ -45,8 +45,8 @@ export async function POST(request: NextRequest) {
         
         return NextResponse.json({ error: false, message: "User registerd Successfully", data: sendUserToSanity })
         
-    } catch (error: any) {
+    } catch (error) {
         
-        return NextResponse.json({error:true,message:error.message,data:null})
+        return NextResponse.json({error:true,message:error,data:null})
     }
 }
