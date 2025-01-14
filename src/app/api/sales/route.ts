@@ -11,6 +11,6 @@ export async function POST(request: NextRequest) {
                             
     )
     return NextResponse.json({
-        error:false,data:saleObj
+        error:false,data:sales
     })
 }
