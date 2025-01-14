@@ -7,7 +7,7 @@ export const checkOutUser = async(formData:FormData) => {
     const city = formData.get('city')
     const country = formData.get('country')
     try {
-        const response = await fetch("/api/user",
+        const response = await fetch("https://milestone3-ecommerce-rho.vercel.app/api/user",
             {
                 method: 'POST',
                 headers: {
