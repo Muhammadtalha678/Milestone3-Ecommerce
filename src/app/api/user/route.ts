@@ -1,19 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import joi from 'joi'
 import { client } from "@/sanity/lib/client";
+import { User } from "sanity";
 
-interface User {
-    _createdAt: string,
-    _id: string,
-    _rev: string,
-    _type: string,
-    _updatedAt: string,
-    address: string,
-    city: string,
-    country: string,
-    email: string,
-    name: string
-}
+
 export async function POST(request: NextRequest) {
         const userValidate = joi.object({
         name:joi.string().min(3).max(255).required(),

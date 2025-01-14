@@ -4,9 +4,12 @@ import Image from 'next/image';
 import React, {useContext, useState} from 'react';
 import { CartContext } from '@/context/CartContext';
 import PopupForm from '@/components/PopupForm'
+import { client } from '@/sanity/lib/client';
+import  User  from '@/interfaces/User';
+import {useRouter} from 'next/navigation'
 
 const CartPage = () => {
-  
+  const router = useRouter()
   const [popUpOpen,setpopUpOpen] = useState<boolean>(false)
   const { cart, removeFromCart,addToCart,decrementItem } = useContext(CartContext);
   return (
@@ -93,7 +96,29 @@ const CartPage = () => {
                   <span>Total</span>
                   <span>${cart.reduce((total: number, item) => (total + parseInt((item.price - (item.price*(item.discountPercentage/100))).toFixed(0)) * item.minimumOrderQuantity) , 0) + 5}</span>
                 </div>
-                <button onClick={()=>{setpopUpOpen(true)}} className="bg-indigo-500 text-white py-2 px-4 w-full mt-5 rounded hover:bg-indigo-600">
+                <button onClick={async () => {
+                  const getUser = localStorage.getItem('userId')!
+                  if (JSON.parse(getUser)) {
+                    console.log(JSON.parse(getUser));
+                    
+                    const users:User[] = await client.fetch(`
+                      *[_type == 'users']
+                      `) 
+                    console.table(users);
+                    
+                    const userExists = users.find((e) => e._id === JSON.parse(getUser))
+                    if (userExists) {
+                      router.push('/order-details')
+                    }
+                    else {
+                      setpopUpOpen(true)
+                    }
+                  }
+                  else {
+                    setpopUpOpen(true)
+                    
+                  }
+                }} className="bg-indigo-500 text-white py-2 px-4 w-full mt-5 rounded hover:bg-indigo-600">
                   Proceed to Checkout
                 </button>
               </div>

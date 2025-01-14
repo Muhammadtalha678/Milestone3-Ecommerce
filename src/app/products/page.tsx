@@ -6,7 +6,8 @@ const Products = async () => {
   try {
     const anity = await client.fetch(
       `*[_type == "product" && "electronics" in tags ]{
-        _id,name,price,discountPercentage,tags,   
+        _id,name,price,discountPercentage,tags,
+        "image":[image.asset->url]
       }`
     )
     console.log(anity);

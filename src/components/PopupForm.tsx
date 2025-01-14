@@ -27,6 +27,7 @@ const PopupForm = ({ onclose }: { onclose: (popupOpen: boolean) => void }) => {
       console.log(result.data);
       
       localStorage.setItem('userId',JSON.stringify(result?.data._id))
+      
       router.push('/order-details')
       // onclose(true)
     } catch (error: unknown) {
