@@ -6,10 +6,10 @@ interface cartContextType {
     addToCart : (item:Product) => void,
     decrementItem : (item:Product) => void,
     removeFromCart: (id: number) => void,
-    
+    clearCart:() => void
 }
 
-export const CartContext = createContext<cartContextType>({cart:[],addToCart:() => {},decrementItem:() => {},removeFromCart:() => {}})
+export const CartContext = createContext<cartContextType>({cart:[],clearCart:() => {},addToCart:() => {},decrementItem:() => {},removeFromCart:() => {}})
 
 const CartContextProvider = ({children}:{children:React.ReactNode}) => {
     const [cart, setCart] = useState<Product[]>([])
@@ -25,6 +25,11 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
         localStorage.setItem('cart',JSON.stringify(cart))
     }, [cart])
     
+    const clearCart = () => {
+        localStorage.removeItem('cart')
+        setCart([])
+    }
+
     const addToCart = (item: Product) => {
         const productExists = cart.find((e) => e.id == item.id)
         console.log(productExists);
@@ -65,7 +70,7 @@ const CartContextProvider = ({children}:{children:React.ReactNode}) => {
         }
     }
     return (
-        <CartContext.Provider value={{ cart, addToCart,decrementItem,removeFromCart }}>
+        <CartContext.Provider value={{ cart, addToCart,decrementItem,removeFromCart,clearCart }}>
             {children}
         </CartContext.Provider>
     )

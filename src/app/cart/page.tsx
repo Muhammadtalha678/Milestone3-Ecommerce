@@ -11,7 +11,7 @@ import {useRouter} from 'next/navigation'
 const CartPage = () => {
   const router = useRouter()
   const [popUpOpen,setpopUpOpen] = useState<boolean>(false)
-  const { cart, removeFromCart,addToCart,decrementItem } = useContext(CartContext);
+  const { cart, removeFromCart,addToCart,decrementItem,clearCart } = useContext(CartContext);
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -108,6 +108,7 @@ const CartPage = () => {
                     
                     const userExists = users.find((e) => e._id === JSON.parse(getUser))
                     if (userExists) {
+                      clearCart()
                       router.push('/order-details')
                     }
                     else {
