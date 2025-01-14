@@ -4,34 +4,28 @@ export default {
     title: "Sales",
     fields: [
         {
-            name: "orderId",
-            type: "string",
-            title: "Order ID",
-        },
-        {
             name: "customerId",
             type: "string",
             title: "Customer ID",
         },
         {
-            name: "items",
+            name: "product_detail",
             type: "array",
-            title: "Order Items",
+            title: "Product Detail",
             of: [
                 {
                     type: "object",
                     fields: [
-                        { name: "itemId", type: "string", title: "Item ID" },
-                        { name: "quantity", type: "number", title: "Quantity" },
-                        { name: "price", type: "number", title: "Price" },
+                        { name: "productId", type: "string", title: "Product ID" },
+                        { name: "quantity_sold", type: "number", title: "Quantity Sold" },
                     ],
                 },
             ],
         },
         {
-            name: "totalPrice",
+            name: "sales_price",
             type: "number",
-            title: "Total Price",
+            title: "Sales Price",
         },
         {
             name: "paymentStatus",
