@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react'
 import OrderDetailsTable from './OrderDetailsTable'
 
 const OrderList = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
+  console.log("orderDetails", orderDetails);
+  
    const [filterData,setFilterData] = useState<SalesObj[]>([])
   
     useEffect(() => {
