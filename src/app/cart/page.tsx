@@ -46,7 +46,7 @@ const CartPage = () => {
 
   const router = useRouter()
   const [popUpOpen,setpopUpOpen] = useState<boolean>(false)
-  const [checkout,setCheckout] = useState<boolean>(false)
+  // const [checkout,setCheckout] = useState<boolean>(false)
   const { cart, removeFromCart,addToCart,decrementItem,clearCart} = useContext(CartContext);
   return (
     <section className="text-gray-600 body-font overflow-hidden">
