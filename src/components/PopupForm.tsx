@@ -51,7 +51,7 @@ const PopupForm = ({ onclose }: { onclose: (popupOpen: boolean) => void }) => {
            },
             
           }
-      await fetch("https://milestone3-ecommerce-rho.vercel.app/api/sales",
+      await fetch("/api/sales",
         {method:"POST",body:JSON.stringify(salesObj)}
       )
       clearCart()

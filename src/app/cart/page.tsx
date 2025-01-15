@@ -46,7 +46,7 @@ const CartPage = () => {
       },
        
      }
-     await fetch("https://milestone3-ecommerce-rho.vercel.app/api/sales",
+     await fetch("/api/sales",
          {method:"POST",body:JSON.stringify(salesObj)}
        )
 
