@@ -6,7 +6,7 @@ const OrderDetailsTable = ({ orderDetails }: { orderDetails: SalesObj }) => {
   return (
     <div className="container mx-auto p-6 sm:p-10 bg-white shadow-lg rounded-lg border border-gray-200">
       {/* Order Header */}
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">{`Order #${orderDetails._id}`}</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-gray-800">{`Order #${orderDetails._id}`}</h1>
 
       {/* Order Info */}
       <div className="mb-8 bg-gray-50 p-4 rounded-lg border border-gray-300">
