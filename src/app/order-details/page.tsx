@@ -3,7 +3,7 @@ import { SalesObj } from '@/interfaces/Sales'
 
 import { client } from '@/sanity/lib/client'
 import React from 'react'
-
+export const revalidate = 0;
 const OrderDetails = async () => {
   try {
     const orderDetails:SalesObj[] = await client.fetch(
