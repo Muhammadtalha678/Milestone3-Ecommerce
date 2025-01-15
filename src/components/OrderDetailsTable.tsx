@@ -1,5 +1,5 @@
 'use client'
-import { ProductDetail, SalesObj } from "@/interfaces/Sales";
+import { SalesObj } from "@/interfaces/Sales";
 
 const OrderDetailsTable = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
   // const userId = JSON.parse(localStorage.getItem('userID')!)
