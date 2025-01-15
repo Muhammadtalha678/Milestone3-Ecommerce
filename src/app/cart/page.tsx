@@ -30,7 +30,7 @@ const CartPage = () => {
         product_detail: cart.map((e) => (
           {
           _key:uuidv4(),
-          productId: e.id,
+          productId: `${e.id}`,
           productName: e.title,
           quantity_sold:e.minimumOrderQuantity
         }
