@@ -1,11 +1,15 @@
 'use client'
 import Link from 'next/link'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '@/context/CartContext'
 import { useRouter } from 'next/navigation'
 
 const Header = () => {
-  const userId = JSON.parse(localStorage.getItem('userId')!)
+  const [user,setUser] = useState(null)
+  useEffect(() => {
+    const userId = JSON.parse(localStorage.getItem('userId')!)
+    if (userId) setUser(userId) 
+  },[])
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const router = useRouter()
   const cartContext = useContext(CartContext)
@@ -68,7 +72,7 @@ const Header = () => {
             Products
           </Link>
           {
-            userId &&
+            user &&
           <Link href={'/order-details'} className="block text-gray-900 hover:text-gray-600">
             Orders
           </Link>
