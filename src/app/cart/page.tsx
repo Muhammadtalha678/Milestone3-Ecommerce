@@ -9,8 +9,44 @@ import  User  from '@/interfaces/User';
 import {useRouter} from 'next/navigation'
 
 const CartPage = () => {
+  const checkOut = async () => {
+    const getUser = localStorage.getItem('userId')!
+    const users:User[] = await client.fetch(`*[_type == 'users']`) 
+    const userExists = users.find((e) => e._id === JSON.parse(getUser))
+    if (userExists) {
+      const salesObj = {
+        customerId : userExists._id,
+        product_detail: cart.map((e) => (
+        {
+          productId: `product-id-${e.id}`,
+          quantity_sold:e.minimumOrderQuantity
+        }
+        
+      )),
+      sales_price :cart.reduce((total: number, item) => (total + parseInt((item.price - (item.price*(item.discountPercentage/100))).toFixed(0)) * item.minimumOrderQuantity) , 0) + 5,
+                        
+      paymentStatus: "Paid",
+        deliveryAddress: {
+         name: userExists.name, addressLine1: userExists.address,
+         country: userExists.country, city: userExists.city
+      },
+       
+     }
+     await fetch("/api/sales",
+         {method:"POST",body:JSON.stringify(salesObj)}
+       )
+
+     clearCart()
+     router.push('/order-details')
+    } else {
+      setpopUpOpen(true)
+    }
+  }
+
+
   const router = useRouter()
   const [popUpOpen,setpopUpOpen] = useState<boolean>(false)
+  const [checkout,setCheckout] = useState<boolean>(false)
   const { cart, removeFromCart,addToCart,decrementItem,clearCart} = useContext(CartContext);
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -96,43 +132,7 @@ const CartPage = () => {
                   <span>Total</span>
                   <span>${cart.reduce((total: number, item) => (total + parseInt((item.price - (item.price*(item.discountPercentage/100))).toFixed(0)) * item.minimumOrderQuantity) , 0) + 5}</span>
                 </div>
-                <button onClick={async () => {
-                  const getUser = localStorage.getItem('userId')!
-                  const users:User[] = await client.fetch(`
-                      *[_type == 'users']
-                      `) 
-                  const userExists = users.find((e) => e._id === JSON.parse(getUser))
-                  if (userExists) {
-                     const salesObj = {
-                        customerId : userExists._id,
-                        product_detail: cart.map((e) => (
-                              {
-                                productId: `product-id-${e.id}`,
-                                quantity_sold:e.minimumOrderQuantity
-                              }
-                              
-                            )),
-                            sales_price :cart.reduce((total: number, item) => (total + parseInt((item.price - (item.price*(item.discountPercentage/100))).toFixed(0)) * item.minimumOrderQuantity) , 0) + 5,
-                        
-                       paymentStatus: "Paid",
-                         deliveryAddress: {
-                          name: userExists.name, addressLine1: userExists.address,
-                          country: userExists.country, city: userExists.city
-                       },
-                        
-                      }
-                    await fetch("/api/sales",
-                          {method:"POST",body:JSON.stringify(salesObj)}
-                        )
-
-                      clearCart()
-                      router.push('/order-details')
-                  }
-                  else {
-                    setpopUpOpen(true)
-                    
-                  }
-                }} className="bg-indigo-500 text-white py-2 px-4 w-full mt-5 rounded hover:bg-indigo-600">
+                <button onClick={checkOut} className="bg-indigo-500 text-white py-2 px-4 w-full mt-5 rounded hover:bg-indigo-600">
                   Proceed to Checkout
                 </button>
               </div>
@@ -143,7 +143,7 @@ const CartPage = () => {
         )}
       </div>
         {
-          popUpOpen && <PopupForm onclose={() => setpopUpOpen(false)}/>
+          popUpOpen && <PopupForm onclose={(closePopUp:boolean) => setpopUpOpen(closePopUp)}/>
         }
     </section>
   );

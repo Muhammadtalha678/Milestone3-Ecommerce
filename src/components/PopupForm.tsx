@@ -29,30 +29,28 @@ const PopupForm = ({ onclose }: { onclose: (popupOpen: boolean) => void }) => {
       console.log(result.data);
       
       localStorage.setItem('userId',JSON.stringify(result?.data._id))
-       const salesObj = {
-                              customerId : `customer-id-${result.data._id}`,
-                              product_detail: cart.map((e) => (
-                                    {
-                                      productId: `product-id-${e.id}`,
-                                      quantity_sold:e.minimumOrderQuantity
-                                    }
-                                    
-                                  )),
-                                  sales_price :cart.reduce((total: number, item) => (total + parseInt((item.price - (item.price*(item.discountPercentage/100))).toFixed(0)) * item.minimumOrderQuantity) , 0) + 5,
-                              
-                             paymentStatus: "Paid",
-                               deliveryAddress: {
-                                name: result.data.name, addressLine1: result.data.address,
-                                country: result.data.country, city: result.data.city
-                             },
-                              
-                            }
-                              await fetch("/api/sales",
+      const salesObj = {
+        customerId : result.data._id,
+        product_detail: cart.map((e) => (
+        {
+          productId: `product-id-${e.id}`,
+          quantity_sold:e.minimumOrderQuantity
+        }
+        
+      )),
+      sales_price :cart.reduce((total: number, item) => (total + parseInt((item.price - (item.price*(item.discountPercentage/100))).toFixed(0)) * item.minimumOrderQuantity) , 0) + 5,
+                        
+      paymentStatus: "Paid",
+        deliveryAddress: {
+         name: result.data.name, addressLine1: result.data.address,
+         country: result.data.country, city: result.data.city
+      },
+       
+      }
+      await fetch("/api/sales",
                           {method:"POST",body:JSON.stringify(salesObj)}
-                        )
-
-                            clearCart()
-                            router.push('/order-details')
+      )
+      clearCart()
       router.push('/order-details')
       // onclose(true)
     } catch (error: unknown) {
