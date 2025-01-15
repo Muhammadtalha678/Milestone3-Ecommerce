@@ -14,6 +14,8 @@ const OrderList = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
               return e.customerId === user
           })
           )
+          console.log(filterData);
+          
         }
       },[])
     return (
