@@ -7,7 +7,7 @@ const OrderDetailsTable = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
   const [userId,setUserId] = useState('')
   const [filterOrders,setFilterOrders] = useState<SalesObj[]>([])
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userID')!)
+    const user = JSON.parse(localStorage.getItem('userId')!)
     setUserId(user)
     console.log(user);
     if (userId) {
