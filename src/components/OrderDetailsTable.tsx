@@ -15,7 +15,7 @@ const OrderDetailsTable = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
       const ordersAgainstID = orderDetails.filter((e) => e.customerId === userId)
       setFilterOrders(ordersAgainstID)
     }
-  })
+  },[])
   
     return (
       <>
