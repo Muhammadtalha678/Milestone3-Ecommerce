@@ -1,4 +1,4 @@
-import OrderDetailsTable from '@/components/OrderDetailsTable'
+// import OrderDetailsTable from '@/components/OrderDetailsTable'
 import { SalesObj } from '@/interfaces/Sales'
 import { client } from '@/sanity/lib/client'
 import React from 'react'
