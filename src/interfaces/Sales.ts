@@ -7,6 +7,7 @@ interface DeliveryAddress {
 
 export interface ProductDetail {
     productId:string,
+    productName:string,
     quantity_sold:string
 }
 
@@ -15,6 +16,7 @@ export interface SalesObj  {
     product_detail: ProductDetail[]
     sales_price: string, // Total price
     paymentStatus: string,
-    deliveryAddress:DeliveryAddress,
+    deliveryAddress: DeliveryAddress,
+    _updatedAt:string
 };
 
