@@ -6,14 +6,7 @@ import React from 'react'
 const OrderDetails = async () => {
   try {
     const orderDetails:SalesObj[] = await client.fetch(
-      `*[_type == 'sales'] | order(_createdAt asc){
-       customerId,
-    product_detail,
-    sales_price, // Total price
-    paymentStatus,
-    deliveryAddress,
-    _created_at
-      }`
+      `*[_type == 'sales'] | order(_createdAt asc)`
     )
     // const { product_detail, sales_price, paymentStatus, deliveryAddress } = orderDetails
     console.log(orderDetails);
