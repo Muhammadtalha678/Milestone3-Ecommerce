@@ -2,7 +2,8 @@
 import { SalesObj } from "@/interfaces/Sales";
 
 const OrderDetailsTable = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
-  // const userId = JSON.parse(localStorage.getItem('userID')!)
+  const userId = JSON.parse(localStorage.getItem('userID')!)
+  
   // if (userId) {
   //   const findUserOrders:SalesObj[] = orderDetails.filter((e) => e.customerId === userId)
   //   // console.log(findUserOrders);
@@ -79,7 +80,7 @@ const OrderDetailsTable = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
     <div>
       {
         orderDetails.map((e,index) => (
-          <h1 key={index}>{e.sales_price}</h1>
+          <h1 key={index}>{e.sales_price} { userId}</h1>
         ))
       }
     </div>
