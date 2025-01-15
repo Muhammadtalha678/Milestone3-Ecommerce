@@ -20,7 +20,7 @@ const OrderDetails = async () => {
     )
     
     // const { product_detail, sales_price, paymentStatus, deliveryAddress } = orderDetails
-    // console.log(orderDetails);
+    console.log(orderDetails);
     
    return (
     <div className="container mx-auto p-4">
