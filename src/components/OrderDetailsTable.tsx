@@ -78,8 +78,8 @@ const OrderDetailsTable = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
   return (
     <div>
       {
-        orderDetails.map((e) => (
-          <h1>{e.sales_price}</h1>
+        orderDetails.map((e,index) => (
+          <h1 key={index}>{e.sales_price}</h1>
         ))
       }
     </div>
