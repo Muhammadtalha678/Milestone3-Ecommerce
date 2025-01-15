@@ -7,6 +7,7 @@ import PopupForm from '@/components/PopupForm'
 import { client } from '@/sanity/lib/client';
 import  User  from '@/interfaces/User';
 import {useRouter} from 'next/navigation'
+import { v4 as uuidv4 } from 'uuid';
 
 const CartPage = () => {
   
@@ -27,8 +28,10 @@ const CartPage = () => {
       const salesObj = {
         customerId : userExists._id,
         product_detail: cart.map((e) => (
-        {
-          productId: `product-id-${e.id}`,
+          {
+          _key:uuidv4(),
+          productId: e.id,
+          productName: e.title,
           quantity_sold:e.minimumOrderQuantity
         }
         

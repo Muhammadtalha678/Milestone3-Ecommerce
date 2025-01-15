@@ -3,6 +3,7 @@ import { FormEvent, useContext, useState } from "react";
 import {checkOutUser} from '@/actions/checkOut.action'
 import { useRouter } from "next/navigation";
 import { CartContext } from "@/context/CartContext";
+import { v4 as uuidv4 } from 'uuid';
 
 const PopupForm = ({ onclose }: { onclose: (popupOpen: boolean) => void }) => {
   const {cart,clearCart} = useContext(CartContext)
@@ -33,8 +34,10 @@ const PopupForm = ({ onclose }: { onclose: (popupOpen: boolean) => void }) => {
         customerId : result.data._id,
         product_detail: cart.map((e) => (
         {
-          productId: `product-id-${e.id}`,
-          quantity_sold:e.minimumOrderQuantity
+          _key:uuidv4(),
+          productId: e.id,
+          productName: e.title,
+          quantity_sold: e.minimumOrderQuantity
         }
         
       )),
