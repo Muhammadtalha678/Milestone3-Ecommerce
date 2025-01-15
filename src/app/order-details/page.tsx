@@ -23,7 +23,7 @@ const OrderDetails = async () => {
       <h1 className="text-2xl font-bold mb-4">Order Details</h1>
 
       {/* Table for Product Details */}
-       <OrderDetailsTable orderDetails={orderDetails}/>
+       {/* <OrderDetailsTable orderDetails={orderDetails}/> */}
     </div>
   ) 
   } catch (error) {
