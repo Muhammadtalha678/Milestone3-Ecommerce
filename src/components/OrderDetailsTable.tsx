@@ -15,15 +15,15 @@ const OrderDetailsTable = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
       const ordersAgainstID = orderDetails.filter((e) => e.customerId === userId)
       setFilterOrders(ordersAgainstID)
     }
-  },[])
+  })
   
     return (
       <>
         {filterOrders.length > 0
           ?
           <div>
-            {filterOrders.map((e) => (
-              <h1>{"customerId" + e.customerId} {e.deliveryAddress.addressLine1 }</h1>
+            {filterOrders.map((e,i) => (
+              <h1 key={i}>{"customerId" + e.customerId} {e.deliveryAddress.addressLine1 }</h1>
             ))}
           </div>
           : <div>0 orders</div>
