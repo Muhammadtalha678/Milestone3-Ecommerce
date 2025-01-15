@@ -18,6 +18,7 @@ export default {
                     fields: [
                         { name: "productId", type: "string", title: "Product ID" },
                         { name: "productName", type: "string", title: "Product Name" },
+                        { name: "productPrice", type: "string", title: "Product Price" },
                         { name: "quantity_sold", type: "number", title: "Quantity Sold" },
                     ],
                 },

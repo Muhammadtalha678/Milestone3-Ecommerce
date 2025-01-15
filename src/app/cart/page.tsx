@@ -31,6 +31,7 @@ const CartPage = () => {
           {
           _key:uuidv4(),
           productId: `${e.id}`,
+          productPrice:`${(e.price - (e.price*(e.discountPercentage/100))).toFixed(0)}`,
           productName: e.title,
           quantity_sold:e.minimumOrderQuantity
         }
@@ -45,7 +46,7 @@ const CartPage = () => {
       },
        
      }
-     await fetch("https://milestone3-ecommerce-rho.vercel.app/api/sales",
+     await fetch("/api/sales",
          {method:"POST",body:JSON.stringify(salesObj)}
        )
 
