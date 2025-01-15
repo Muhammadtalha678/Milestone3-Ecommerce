@@ -23,7 +23,7 @@ const OrderList = ({ orderDetails }: { orderDetails: SalesObj[] }) => {
         filterData.map((e,i) => (
             <OrderDetailsTable orderDetails={e} key={i}/>
         ))
-        : <h1 className="text-2xl font-bold mb-4">No Orders Found</h1>
+        : <h1 className="text-2xl font-bold mb-4 flex items-center justify-center">No Orders Found</h1>
         }    
     </div>
   )
