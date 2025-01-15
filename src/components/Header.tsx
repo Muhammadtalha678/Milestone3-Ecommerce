@@ -5,6 +5,7 @@ import { CartContext } from '@/context/CartContext'
 import { useRouter } from 'next/navigation'
 
 const Header = () => {
+  const userId = JSON.parse(localStorage.getItem('userId')!)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const router = useRouter()
   const cartContext = useContext(CartContext)
@@ -34,17 +35,17 @@ const Header = () => {
         <div className="md:hidden flex items-center space-x-4">
           {/* Cart Button */}
           <button
-          type="button"
-          onClick={() => router.push('/cart')}
-          className=" md:inline-flex items-center px-3 py-2.5 text-sm font-medium text-center text-black bg-gray-100 rounded-lg hover:bg-gray-200"
-        >
-          Cart
-          <span
-            className="inline-flex items-center justify-center w-5 h-5 ml-2 text-xs font-semibold bg-white rounded-full"
+            type="button"
+            onClick={() => router.push('/cart')}
+            className="md:inline-flex items-center px-3 py-2.5 text-sm font-medium text-center text-black bg-gray-100 rounded-lg hover:bg-gray-200"
           >
-            {cart.length}
-          </span>
-        </button>
+            Cart
+            <span
+              className="inline-flex items-center justify-center w-5 h-5 ml-2 text-xs font-semibold bg-white rounded-full"
+            >
+              {cart.length}
+            </span>
+          </button>
 
           {/* Hamburger Menu */}
           <button
@@ -66,6 +67,12 @@ const Header = () => {
           <Link href={'/products'} className="block text-gray-900 hover:text-gray-600">
             Products
           </Link>
+          {
+            userId &&
+          <Link href={'/order-details'} className="block text-gray-900 hover:text-gray-600">
+            Orders
+          </Link>
+          }
         </nav>
 
         {/* Cart Button for Desktop */}
